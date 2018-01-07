@@ -1,0 +1,25 @@
+body {
+    background-color: #232323;
+}
+
+.square {
+    width: 30%;
+    background-color: magenta;
+    padding-bottom: 30%; /* creates space for divs*/
+    float: left;
+    margin: 1.66%;
+    border-radius: 10%;
+}  
+#container{
+    margin: 0 auto; /* trick to center squares*/
+    max-width: 600px; /* don't want squares to take up entire screen, do we? */
+}
+
+h1 {
+    color: #fff;
+    text-align: center;
+}
+
+#colorDisplay {
+    text-transform: uppercase;
+}
