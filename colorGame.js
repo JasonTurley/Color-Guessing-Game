@@ -1,5 +1,5 @@
-var colors = generateRandomColors(6);
-
+var numSquares = 6;
+var colors = generateRandomColors(numSquares);
 var squares = document.querySelectorAll(".square");
 var goalColor = selectColor();
 var colorDisplay = document.getElementById("colorDisplay");
@@ -7,7 +7,46 @@ var message = document.getElementById("message");
 var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
 var countDisplay = document.querySelector("#tryCount");
+var easyButton = document.querySelector("#easyBtn");
+var hardButton = document.querySelector("#hardBtn");
 var tryCount = 0;
+
+// hardButton.addEventListener("mouseleave", function() {
+//     hardButton.classList.remove("selected");
+// });
+
+easyButton.addEventListener("click", function() {
+    // Change selected button
+    easyButton.classList.add("selected");
+    hardButton.classList.remove("selected");
+    // change number of squares
+    numSquares = 3;
+    colors = generateRandomColors(numSquares);
+    goalColor = selectColor();
+    colorDisplay.textContent = goalColor; 
+    for (var i = 0; i < squares.length; i++) {
+        if (colors[i]) {
+            squares[i].style.backgroundColor = colors[i];
+        } else {
+            squares[i].style.display = "none";
+        }
+    }
+});
+
+hardButton.addEventListener("click", function() {
+    // Change selected button
+    hardButton.classList.add("selected");
+    easyButton.classList.remove("selected");
+
+    numSquares = 6;
+    colors = generateRandomColors(numSquares);
+    goalColor = selectColor();
+    colorDisplay.textContent = goalColor; 
+    for (var i = 0; i < squares.length; i++) {
+        squares[i].style.backgroundColor = colors[i];
+        squares[i].style.display = "block";
+    }
+});
 
 colorDisplay.textContent = goalColor;
 
@@ -69,7 +108,7 @@ function generateRandomColors(num) {
 // Resets the game
 function reset() {
     // generate new randomly colored squares
-    colors = generateRandomColors(colors.length);
+    colors = generateRandomColors(numSquares);
     goalColor = selectColor();
     // update heading display color
     colorDisplay.textContent = goalColor;
@@ -78,7 +117,7 @@ function reset() {
         squares[i].style.backgroundColor = colors[i];
     }
     // reset heading, button and span
-    h1.style.backgroundColor = "#232323";
+    h1.style.backgroundColor = "steelblue";
     resetButton.textContent = "New Colors";
     message.textContent = "";
     tryCount = 0;
