@@ -6,6 +6,8 @@ var colorDisplay = document.getElementById("colorDisplay");
 var message = document.getElementById("message");
 var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
+var countDisplay = document.querySelector("#tryCount");
+var tryCount = 0;
 
 colorDisplay.textContent = goalColor;
 
@@ -15,12 +17,13 @@ for (var i = 0; i < squares.length; i++) {
     // add click listeners to squares
     squares[i].addEventListener("click", function() {
         var clickedColor = this.style.backgroundColor; 
+        ++tryCount;
         if (clickedColor === goalColor) {
-            message.textContent = "Correct!";
             changeColor(clickedColor);
-            // change h1 background to goal color
             h1.style.backgroundColor = goalColor;
-            // Ask to play again
+            message.textContent = "Correct!";
+            (tryCount === 1) ? countDisplay.textContent = "Took " + tryCount + " try"
+                             : countDisplay.textContent = "Took " + tryCount + " tries";
             resetButton.textContent = "Play Again?";
         }
         else {
@@ -78,6 +81,8 @@ function reset() {
     h1.style.backgroundColor = "#232323";
     resetButton.textContent = "New Colors";
     message.textContent = "";
+    tryCount = 0;
+    countDisplay.textContent = "";
 }
 
 resetButton.addEventListener("click", reset);
