@@ -24,6 +24,9 @@ h1 {
     text-transform: uppercase;
 }
 
-span {
-    color: white;
+#banner {
+    background-color: white;
+    height: 30px;
+    text-align: center;
+    color: black;
 }

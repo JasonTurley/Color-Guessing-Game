@@ -4,6 +4,8 @@ var squares = document.querySelectorAll(".square");
 var goalColor = selectColor();
 var colorDisplay = document.getElementById("colorDisplay");
 var message = document.getElementById("message");
+var h1 = document.querySelector("h1");
+var resetButton = document.querySelector("#reset");
 
 colorDisplay.textContent = goalColor;
 
@@ -16,6 +18,10 @@ for (var i = 0; i < squares.length; i++) {
         if (clickedColor === goalColor) {
             message.textContent = "Correct!";
             changeColor(clickedColor);
+            // change h1 background to goal color
+            h1.style.backgroundColor = goalColor;
+            // Ask to play again
+            resetButton.textContent = "Play Again?";
         }
         else {
             // fade color into background
@@ -38,16 +44,40 @@ function selectColor() {
     return colors[Math.floor(Math.random() * colors.length)];
 }
 
-// Returns number between 0 and 255
+// Helper function: returns number between 0 and 255
 function randomColor() {
-    return (Math.floor(Math.random() * 256));
+    var r = Math.floor(Math.random() * 256);
+    var g = Math.floor(Math.random() * 256);
+    var b = Math.floor(Math.random() * 256);
+    return "rgb(" + r + ", " + g + ", " + b +")";
 }
 
+// Returns an array of random rgb colors
 function generateRandomColors(num) {
     var arr = [];
     // add num random colors to array
     for (var i = 0; i < num; i++) {
-        arr[i] = "rgb(" + randomColor() + ", " + randomColor() + ", " + randomColor() +")";
+        arr.push(randomColor());
+        // arr[i] = randomColor();
     }
     return arr;
 }
+
+// Resets the game
+function reset() {
+    // generate new randomly colored squares
+    colors = generateRandomColors(colors.length);
+    goalColor = selectColor();
+    // update heading display color
+    colorDisplay.textContent = goalColor;
+    // change square colors
+    for (var i = 0; i < squares.length; i++) {
+        squares[i].style.backgroundColor = colors[i];
+    }
+    // reset heading, button and span
+    h1.style.backgroundColor = "#232323";
+    resetButton.textContent = "New Colors";
+    message.textContent = "";
+}
+
+resetButton.addEventListener("click", reset);
