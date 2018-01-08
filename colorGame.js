@@ -9,9 +9,9 @@ var colors = [
 
 // iterate across squares and assign each a color
 var squares = document.querySelectorAll(".square");
-var goalColor = colors[4];
+var goalColor = selectColor();
 var colorDisplay = document.getElementById("colorDisplay");
-var message = document.getElementById("message")
+var message = document.getElementById("message");
 
 
 colorDisplay.textContent = goalColor;
@@ -24,6 +24,7 @@ for (var i = 0; i < squares.length; i++) {
         var clickedColor = this.style.backgroundColor; 
         if (clickedColor === goalColor) {
             message.textContent = "Correct!";
+            changeColor(clickedColor);
         }
         else {
             // fade color into background
@@ -33,11 +34,15 @@ for (var i = 0; i < squares.length; i++) {
     });
 }
 
+// Changes color of all squares to the goal color when the correct square is clicked
 function changeColor(color) {
-    // iterate across all squares
     for (var i = 0; i < squares.length; i++) {
         // change square color to goal color
         squares[i].style.backgroundColor = color;
-        console.log("test");
     }
+}
+
+// Selects random index from colors array
+function selectColor() {
+    return colors[Math.floor(Math.random() * colors.length)];
 }
