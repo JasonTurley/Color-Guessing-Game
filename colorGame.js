@@ -8,11 +8,15 @@ var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
 var modeButtons = document.querySelectorAll(".mode");
 
-colorDisplay.textContent = goalColor;   // RGB color to guess
-
 init();
 
 function init() {
+    setMode();
+    setSquares();
+    reset();
+}
+
+function setMode() {
     // mode button event listeners
     for (var i = 0; i < modeButtons.length; i++) {
         modeButtons[i].addEventListener("click", function() {
@@ -23,7 +27,9 @@ function init() {
             reset();
         });
     }
-    
+}
+
+function setSquares() {
     for (var i = 0; i < squares.length; i++) {   
         // add click listeners to squares
         squares[i].addEventListener("click", function() {
@@ -40,9 +46,8 @@ function init() {
             }
         });
     }
-
-    reset();
 }
+
 // Resets the game
 function reset() {
     // generate new randomly colored squares
